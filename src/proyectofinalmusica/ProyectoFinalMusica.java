@@ -385,6 +385,43 @@ public class ProyectoFinalMusica {
         }
     }
     
+    public static void menuBusqueda(Cancion cancion){
+        ProyectoFinalMusica obj = new ProyectoFinalMusica();
+        Biblioteca biblioteca = getBiblioteca();
+        Reproductor reproductor = getReproductor();
+        System.out.println("1. Reproducir");
+        System.out.println("2. Agregar a playlist");
+        System.out.println("3. Agregar a lista de reproducción");
+        System.out.println("4. Eliminar");
+        System.out.println("Seleccione una opción");
+        int opc = Integer.parseInt(obj.sc.nextLine()); 
+        switch(opc){
+            case 1:
+                System.out.println("---REPRODUCIR---");
+                reproductor.reproducirCancion(cancion);
+                break;
+            case 2:
+                System.out.println("---AGREGAR A PLAYLIST---");
+                biblioteca.listaPlaylist();
+                System.out.println("¿A cual playlist desea agregarla?(nombre)");
+                String nombre = obj.sc.nextLine();
+                Playlist playlistE = biblioteca.buscarPlaylist(nombre);
+                playlistE.agregarCancion(cancion);
+                break;
+            case 3:
+                System.out.println("---AGREGAR A REPRODUCCION---");
+                reproductor.agregarCancionLista(cancion);
+                break;
+            case 4:
+                System.out.println("---ELIMINAR---");
+                biblioteca.eliminarCancion(cancion);
+                break;
+            default:
+                System.out.println("La opcion no es valida");
+        }
+    }
+    
+
         public static void buscarTitulo(){
             ProyectoFinalMusica obj = new ProyectoFinalMusica();
             System.out.println("Ingrese el título:");
@@ -396,6 +433,10 @@ public class ProyectoFinalMusica {
                 for(int i = 0; i < cancionesE.size(); i++){
                     System.out.println((i + 1)+". "+cancionesE.get(i));
                 }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
             }else{
                 System.out.println("No se encontró ninguna canción con ese título.");
             }
@@ -412,6 +453,10 @@ public class ProyectoFinalMusica {
                 for(int i = 0; i < cancionesE.size(); i++){
                     System.out.println((i + 1)+". "+cancionesE.get(i));
                 }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
             }else{
                 System.out.println("No se encontró ninguna canción con ese artista.");
             }
@@ -428,6 +473,10 @@ public class ProyectoFinalMusica {
                 for(int i = 0; i < cancionesE.size(); i++){
                     System.out.println((i + 1)+". "+cancionesE.get(i));
                 }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
             }else{
                 System.out.println("No se encontró ninguna canción con ese album.");
             }
@@ -444,6 +493,10 @@ public class ProyectoFinalMusica {
                 for(int i = 0; i < cancionesE.size(); i++){
                     System.out.println((i + 1)+". "+cancionesE.get(i));
                 }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
             }else{
                 System.out.println("No se encontró ninguna canción con ese genero.");
             }

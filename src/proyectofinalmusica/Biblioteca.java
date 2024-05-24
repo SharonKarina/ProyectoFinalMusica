@@ -14,6 +14,7 @@ public class Biblioteca {
     
     public void agregarCancion(Cancion cancion){
         canciones.add(cancion);
+        System.out.println("La "+cancion.toString()+" fue agregada con exito.");
     }
     
     public void eliminarCancion(Cancion cancion){
