@@ -411,10 +411,12 @@ public class ProyectoFinalMusica {
             case 3:
                 System.out.println("---AGREGAR A REPRODUCCION---");
                 reproductor.agregarCancionLista(cancion);
+                System.out.println("La "+cancion.toString()+" se agrego a la lista de reproducción.");
                 break;
             case 4:
                 System.out.println("---ELIMINAR---");
                 biblioteca.eliminarCancion(cancion);
+                System.out.println("La "+cancion.toString()+" se elimino de la biblioteca.");
                 break;
             default:
                 System.out.println("La opcion no es valida");
@@ -586,9 +588,14 @@ public class ProyectoFinalMusica {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Ingresa el título de la canción a agregar:");
         String titulo = obj.sc.nextLine();
-        Cancion cancion = getBiblioteca().buscarTitulo(titulo).get(0);
-        playlist.agregarCancion(cancion);
-        System.out.println("La canción "+ cancion.toString() +" se ha agregado a la playlist.");
+        ArrayList<Cancion> cancionesB = getBiblioteca().buscarTitulo(titulo);
+        if(cancionesB.size() > 0){
+            Cancion cancion = cancionesB.get(0);
+            playlist.agregarCancion(cancion);
+            System.out.println("La " + cancion.toString() + " se ha agregado a la playlist.");
+        }else{
+            System.out.println("La canción con el título '" + titulo + "' no existe en la biblioteca.");
+        }
     }
 
     public static void eliminarCancionPlaylist(Playlist playlist) {
