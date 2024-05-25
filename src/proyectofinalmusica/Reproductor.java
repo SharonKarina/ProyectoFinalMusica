@@ -57,6 +57,10 @@ public class Reproductor {
     public void reanudarReproduccion() {
         if(!estaReproduciendo){
             estaReproduciendo = true;
+            System.out.println("---"+this.cancionActual.consultarTitulo()+"---");
+            System.out.println("Artista: "+this.cancionActual.consultarArtista()+".");
+            System.out.println("Album: "+this.cancionActual.consultarAlbum()+".");
+            System.out.println("Genero: "+this.cancionActual.consultarGenero()+".");
             System.out.println("Reproducción reanudada");
         }else{
             System.out.println("La reprducción ya está en curso");
@@ -73,10 +77,13 @@ public class Reproductor {
     }
 
     public void retrocederReproduccion() {
-        if (estaReproduciendo && this.posicionActual > 0) {
+        if(estaReproduciendo && this.posicionActual > 0){
             this.posicionActual--;
             reproducirCancion(this.listaReproduccion.get(this.posicionActual));
-        } else {
+        }else if(estaReproduciendo && this.posicionActual == 0){
+            this.posicionActual = 0;
+            reproducirCancion(this.listaReproduccion.get(this.posicionActual));
+        }else{
             System.out.println("No se puede retroceder, no hay canciones antes.");
         }
     }

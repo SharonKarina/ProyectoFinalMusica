@@ -211,7 +211,7 @@ public class ProyectoFinalMusica {
     
     public static void eliminarCancionReproducir(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
-        System.out.println("¿Qué canción desea eliminar deq la lista de reproducción? (titulo-artista)");
+        System.out.println("¿Qué canción desea eliminar de la lista de reproducción? (titulo-artista)");
         String datos = obj.sc.nextLine();
         String[] arregloDatos = datos.split("-");  
         String titulo = arregloDatos[0];
@@ -429,16 +429,21 @@ public class ProyectoFinalMusica {
                 break;
             case 2:
                 System.out.println("---AGREGAR A PLAYLIST---");
-                biblioteca.listaPlaylist();
-                System.out.println("¿A cual playlist desea agregarla?(nombre)");
-                String nombre = obj.sc.nextLine();
-                Playlist playlistE = biblioteca.buscarPlaylist(nombre);
-                if(playlistE != null){
-                    playlistE.agregarCancion(cancion);
-                    System.out.println("La "+cancion.toString()+" se ha agregado a la playlist "+nombre);
+                ArrayList<Playlist> playlists = biblioteca.getPlaylist();
+                if(playlists.size() == 0){
+                    System.out.println("No hay playlists disponibles en la biblioteca.");
                 }else{
-                    System.out.println("No se encontro la playlist "+nombre);
-                }               
+                    biblioteca.listaPlaylist();
+                    System.out.println("¿A cual playlist desea agregarla?(nombre)");
+                    String nombre = obj.sc.nextLine();
+                    Playlist playlistE = biblioteca.buscarPlaylist(nombre);
+                    if(playlistE != null){
+                        playlistE.agregarCancion(cancion);
+                        System.out.println("La "+cancion.toString()+" se ha agregado a la playlist "+nombre);
+                    }else{
+                        System.out.println("No se encontro la playlist "+nombre);
+                    }
+                }
                 break;
             case 3:
                 System.out.println("---AGREGAR A REPRODUCCION---");
