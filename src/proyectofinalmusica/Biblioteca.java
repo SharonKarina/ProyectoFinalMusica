@@ -32,8 +32,8 @@ public class Biblioteca {
     public ArrayList<Cancion> buscarTitulo(String titulo){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
-            if(this.canciones.get(i).consultarTitulo().equals(titulo)){
-                cancionesE.add(this.canciones.get(i));
+            if(this.canciones.get(i).consultarTitulo().toLowerCase().equals(titulo.toLowerCase())){
+            cancionesE.add(this.canciones.get(i));
             }
         }
         return cancionesE;
@@ -42,7 +42,7 @@ public class Biblioteca {
     public ArrayList<Cancion> buscarArtista(String artista){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
-            if(this.canciones.get(i).consultarArtista().equals(artista)){
+            if(this.canciones.get(i).consultarArtista().toLowerCase().equals(artista.toLowerCase())){
                 cancionesE.add(this.canciones.get(i));
             }
         }
@@ -52,7 +52,7 @@ public class Biblioteca {
     public ArrayList<Cancion> buscarAlbum(String album){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
-            if(this.canciones.get(i).consultarAlbum().equals(album)){
+            if(this.canciones.get(i).consultarAlbum().toLowerCase().equals(album.toLowerCase())){
                 cancionesE.add(this.canciones.get(i));
             }
         }
@@ -62,7 +62,7 @@ public class Biblioteca {
     public ArrayList<Cancion> buscarGenero(String genero){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
-            if(this.canciones.get(i).consultarGenero().equals(genero)){
+            if(this.canciones.get(i).consultarGenero().toLowerCase().equals(genero.toLowerCase())){
                 cancionesE.add(this.canciones.get(i));
             }
         }
@@ -71,7 +71,7 @@ public class Biblioteca {
     
     public Playlist buscarPlaylist(String nombre){
         for(int i=0; i< this.playlist.size(); i++){
-            if(this.playlist.get(i).getNombre().equals(nombre)){
+            if(this.playlist.get(i).getNombre().toLowerCase().equals(nombre.toLowerCase())){
                 return this.playlist.get(i);
             }
         }

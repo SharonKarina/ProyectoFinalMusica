@@ -15,8 +15,7 @@ public class Reproductor {
         this.posicionActual = -1;
     }
     
-    public void reproducirCancion(Cancion cancion) {
-        detenerReproduccion();
+    public void reproducirCancion(Cancion cancion){
         cancionActual = cancion;
         this.listaReproduccion = new ArrayList<>();
         this.listaReproduccion.add(cancion);
