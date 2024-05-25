@@ -59,7 +59,7 @@ public class Reproductor {
             estaReproduciendo = true;
             System.out.println("Reproducción reanudada");
         }else{
-            System.out.println("La reprosucción ya está en curso");
+            System.out.println("La reprducción ya está en curso");
         }
     }
 
@@ -93,7 +93,7 @@ public class Reproductor {
         }
     }
 
-    Cancion getCancionActual() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cancion getCancionActual() {
+        return cancionActual;
     }
 }

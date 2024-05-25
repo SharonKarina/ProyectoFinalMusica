@@ -122,6 +122,7 @@ public class ProyectoFinalMusica {
             case 5:
                 System.out.println("---DETENER REPRODUCCION---");
                 detenerReproduccion();
+                break;
             case 6:
                 System.out.println("---AGREGAR CANCION---");
                 agregarCancionReproducir();
@@ -160,6 +161,7 @@ public class ProyectoFinalMusica {
         Reproductor reproductor = getReproductor();
         if(cancionActual != null){
             reproductor.pausarReproduccion();
+            reproduciendo();
         } else {
         System.out.println("No hay ninguna canción en reproducción.");
     }
@@ -168,16 +170,19 @@ public class ProyectoFinalMusica {
     public static void reanudarReproduccion() {
         Reproductor reproductor = getReproductor();
         reproductor.reanudarReproduccion();
+        reproduciendo();
     }
     
     public static void avanzarReproduccion() {
         Reproductor reproductor = getReproductor();
         reproductor.avanzarReproduccion();
+        reproduciendo();
     }
 
     public static void retrocederReproduccion() {
         Reproductor reproductor = getReproductor();
         reproductor.retrocederReproduccion();
+        reproduciendo();
     }
     
     public static void agregarCancionReproducir(){
@@ -201,6 +206,7 @@ public class ProyectoFinalMusica {
         Reproductor reproductor = getReproductor();
         reproductor.agregarCancionLista(cancionAgregar);
         System.out.println("La canción " + cancionAgregar.consultarTitulo() + " se ha agregado a la lista de reproducción.");
+        reproduciendo();
     }
     
     public static void eliminarCancionReproducir(){
@@ -224,6 +230,7 @@ public class ProyectoFinalMusica {
         Reproductor reproductor = getReproductor();
         reproductor.eliminarCancionLista(cancionEliminar);
         System.out.println("La canción " + cancionEliminar.consultarTitulo() + " se ha eliminado a la lista de reproducción.");
+        reproduciendo();
     }
     
     public static void detenerReproduccion(){
