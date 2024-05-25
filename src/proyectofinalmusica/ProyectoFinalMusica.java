@@ -65,13 +65,7 @@ public class ProyectoFinalMusica {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("0. Salir");
         System.out.println("1. Reproducir");
-        System.out.println("2. Pausar");
-        System.out.println("3. Renaudar");
-        System.out.println("4. Avanzar");
-        System.out.println("5. Retroceder");
-        System.out.println("6. Detener reproducción");
-        System.out.println("7. Agregar canción");
-        System.out.println("8. Eliminar canción");
+        System.out.println("Seleccione una opción");
         int opc = Integer.parseInt(obj.sc.nextLine());
         ejecutarReproducir(opc);
     }
@@ -86,30 +80,53 @@ public class ProyectoFinalMusica {
                 System.out.println("---REPRODUCIR---");
                 reproducirCancion();
                 break;
-            case 2:
+            default:
+                System.out.println("La opción no es valida");       
+        }
+    }
+        
+    public static void reproduciendo(){
+        ProyectoFinalMusica obj = new ProyectoFinalMusica();
+        System.out.println("0. Salir");
+        System.out.println("1. Pausar");
+        System.out.println("2. Renaudar");
+        System.out.println("3. Avanzar");
+        System.out.println("4. Retroceder");
+        System.out.println("5. Detener reproducción");
+        System.out.println("6. Agregar canción");
+        System.out.println("7. Eliminar canción");
+        int opc = Integer.parseInt(obj.sc.nextLine());
+        ejecutarReproduciendo(opc);
+    }    
+    
+    public static void ejecutarReproduciendo(int opcion){
+        switch(opcion){
+            case 0:
+                System.exit(0);
+            case 1:
                 System.out.println("---PAUSAR---");
                 pausarReproduccion();
                 break;
-            case 3:
+            case 2:
                 System.out.println("---REANUDAR---");
                 reanudarReproduccion();
                 break;
-            case 4:
+            case 3:
                 System.out.println("---AVANZAR---");
                 avanzarReproduccion();
                 break;
-            case 5:
+            case 4:
                 System.out.println("---RETROCEDER---");
                 retrocederReproduccion();
                 break;
-            case 6:
+            case 5:
                 System.out.println("---DETENER REPRODUCCION---");
                 detenerReproduccion();
-            case 7:
+            case 6:
                 System.out.println("---AGREGAR CANCION---");
                 agregarCancionReproducir();
                 break;
-            case 8:
+            case 7:
                 System.out.println("---ELIMINAR CANCION---");
                 eliminarCancionReproducir();
                 break;
@@ -131,10 +148,12 @@ public class ProyectoFinalMusica {
             Cancion cancionRepro = listaCanciones.get(opcion - 1);
             Reproductor reproductor = getReproductor();
             reproductor.reproducirCancion(cancionRepro);
+            reproduciendo();
         }else{
             System.out.println("No hay canciones en la biblioteca.");
         }
     }
+    
     
     public static void pausarReproduccion() {
         Cancion cancionActual = ProyectoFinalMusica.getReproductor().getCancionActual();
@@ -399,6 +418,7 @@ public class ProyectoFinalMusica {
             case 1:
                 System.out.println("---REPRODUCIR---");
                 reproductor.reproducirCancion(cancion);
+                reproduciendo();
                 break;
             case 2:
                 System.out.println("---AGREGAR A PLAYLIST---");
@@ -406,7 +426,12 @@ public class ProyectoFinalMusica {
                 System.out.println("¿A cual playlist desea agregarla?(nombre)");
                 String nombre = obj.sc.nextLine();
                 Playlist playlistE = biblioteca.buscarPlaylist(nombre);
-                playlistE.agregarCancion(cancion);
+                if(playlistE != null){
+                    playlistE.agregarCancion(cancion);
+                    System.out.println("La "+cancion.toString()+" se ha agregado a la playlist "+nombre);
+                }else{
+                    System.out.println("No se encontro la playlist "+nombre);
+                }               
                 break;
             case 3:
                 System.out.println("---AGREGAR A REPRODUCCION---");
@@ -486,7 +511,7 @@ public class ProyectoFinalMusica {
         
         public static void buscarGenero(){
             ProyectoFinalMusica obj = new ProyectoFinalMusica();
-            System.out.println("Ingrese el geneto:");
+            System.out.println("Ingrese el genero:");
             String genero = obj.sc.nextLine();
             Biblioteca biblioteca = getBiblioteca();
             ArrayList<Cancion> cancionesE = biblioteca.buscarGenero(genero);
@@ -616,11 +641,16 @@ public class ProyectoFinalMusica {
     public static void reproducirPlaylist(Playlist playlist){
         Reproductor reproductor = getReproductor();
         ArrayList<Cancion> cancionesP = playlist.getCanciones();
-        for(int i=0; i<cancionesP.size();i++){
-            Cancion cancion = cancionesP.get(i);
-            reproductor.reproducirCancion(cancion);
+        if(cancionesP.size() == 0){
+            System.out.println("La playlist "+playlist.getNombre()+" no tiene canciones");
+        }else{
+            System.out.println("Reproduciendo la playlist: " + playlist.getNombre());
+            for(int i=0; i<cancionesP.size();i++){
+                Cancion cancion = cancionesP.get(i);
+                reproductor.reproducirCancion(cancion);
+                reproduciendo();
+            }
         }
-        System.out.println("Reproduciendo la playlist: " + playlist.getNombre());
     }
     
     public static void eliminarPlaylist(){
