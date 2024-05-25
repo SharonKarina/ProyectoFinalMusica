@@ -548,8 +548,13 @@ public class ProyectoFinalMusica {
         String nombre = obj.sc.nextLine();
         Playlist playlistS = biblioteca.buscarPlaylist(nombre);
         if(playlistS != null){
-            playlistS.listaCanciones();
-            ejecutarPlaylist(playlistS);
+            if(playlistS.getCanciones().size()>0){
+                playlistS.listaCanciones();
+                ejecutarPlaylist(playlistS);
+            }else{
+                System.out.println("La playlist "+nombre+" no tiene canciones.");
+                ejecutarPlaylist(playlistS);
+            }
         }else{
             System.out.println("No se encontró la playlist '" + nombre + "'.");
         }
@@ -611,7 +616,6 @@ public class ProyectoFinalMusica {
     public static void reproducirPlaylist(Playlist playlist){
         Reproductor reproductor = getReproductor();
         ArrayList<Cancion> cancionesP = playlist.getCanciones();
-        
         for(int i=0; i<cancionesP.size();i++){
             Cancion cancion = cancionesP.get(i);
             reproductor.reproducirCancion(cancion);
