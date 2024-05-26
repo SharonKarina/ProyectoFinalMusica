@@ -17,9 +17,8 @@ public class Reproductor {
     
     public void reproducirCancion(Cancion cancion){
         cancionActual = cancion;
-        this.listaReproduccion = new ArrayList<>();
         this.listaReproduccion.add(cancion);
-        this.posicionActual = 0;
+        this.posicionActual = this.listaReproduccion.size() - 1;
         reproducirAudio(cancion);
         estaReproduciendo = true;
     }
@@ -34,11 +33,13 @@ public class Reproductor {
     
     public void agregarCancionLista(Cancion cancion) {
         this.listaReproduccion.add(cancion);
+        this.posicionActual = this.listaReproduccion.size() - 1;
     }
     
     public void eliminarCancionLista(Cancion cancion) {
+        int indiceCancion = this.listaReproduccion.indexOf(cancion);
         this.listaReproduccion.remove(cancion);
-        if(this.posicionActual>0){
+        if (indiceCancion <= this.posicionActual) {
             this.posicionActual--;
         }
     }
@@ -84,7 +85,7 @@ public class Reproductor {
             this.posicionActual = 0;
             reproducirCancion(this.listaReproduccion.get(this.posicionActual));
         }else{
-            System.out.println("No se puede retroceder, no hay canciones antes.");
+        System.out.println("No se puede retroceder, no hay canciones antes.");
         }
     }
 
