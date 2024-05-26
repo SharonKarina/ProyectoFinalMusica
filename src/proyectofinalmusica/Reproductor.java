@@ -99,6 +99,18 @@ public class Reproductor {
             System.out.println("La reproduccion de la cancion se detuvo.");
         }
     }
+    
+    public void listaReproduccion(){
+        if(listaReproduccion.isEmpty()){
+            System.out.println("La lista de reproducción está vacía");
+        }else{
+            System.out.println("Canciones en la lista de reproducción:");
+            for(int i = 0; i < listaReproduccion.size(); i++){
+                Cancion cancion = listaReproduccion.get(i);
+                System.out.println((i + 1) + ". " + cancion.consultarTitulo()+", "+cancion.consultarArtista()+", "+cancion.consultarAlbum()+", "+cancion.consultarGenero());
+            }
+        }
+    }
 
     public Cancion getCancionActual() {
         return cancionActual;

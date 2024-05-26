@@ -93,8 +93,9 @@ public class ProyectoFinalMusica {
         System.out.println("3. Avanzar");
         System.out.println("4. Retroceder");
         System.out.println("5. Detener reproducción");
-        System.out.println("6. Agregar canción");
-        System.out.println("7. Eliminar canción");
+        System.out.println("6. Ver lista de reproducción");
+        System.out.println("7. Agregar canción");
+        System.out.println("8. Eliminar canción");
         int opc = Integer.parseInt(obj.sc.nextLine());
         ejecutarReproduciendo(opc);
     }    
@@ -124,10 +125,14 @@ public class ProyectoFinalMusica {
                 detenerReproduccion();
                 break;
             case 6:
+                System.out.println("---VER LISTA DE REPRODUCCION---");
+                listaReproduccion();
+                break;
+            case 7:
                 System.out.println("---AGREGAR CANCION---");
                 agregarCancionReproducir();
                 break;
-            case 7:
+            case 8:
                 System.out.println("---ELIMINAR CANCION---");
                 eliminarCancionReproducir();
                 break;
@@ -183,6 +188,11 @@ public class ProyectoFinalMusica {
         Reproductor reproductor = getReproductor();
         reproductor.retrocederReproduccion();
         reproduciendo();
+    }
+    
+    public static void listaReproduccion(){
+        Reproductor reproductor = new Reproductor();
+        reproductor.listaReproduccion();
     }
     
     public static void agregarCancionReproducir(){
