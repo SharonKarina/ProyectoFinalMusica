@@ -20,6 +20,7 @@ public class ProyectoFinalMusica {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         reproductor = new Reproductor();
         biblioteca = new Biblioteca();
+        //Se comienza a ejecutar el programa con mostrar menú hasta que el usuario eliga la opción de salir
         int veces = 0;
         do{
             mostrarMenu();
@@ -27,6 +28,7 @@ public class ProyectoFinalMusica {
         }while(veces != 0);
     }
     
+    //Muestra las tres opciones globales del reproductor de música
     public static void mostrarMenu(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("---BIENVENIDO---");
@@ -39,6 +41,7 @@ public class ProyectoFinalMusica {
         ejecutarMenu(opcion);
     }
     
+    //Ejecuta la opción que el usuario selecciona
     public static void ejecutarMenu(int opc){
         switch(opc){
             case 0:
@@ -61,6 +64,7 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Confirma que el usuario quiere reproducir alguna canción
     public static void reproducir(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("0. Salir");
@@ -85,6 +89,7 @@ public class ProyectoFinalMusica {
         }
     }
         
+    //Muestra las opciones que tienen el usuario mientras se encuentra reproduciendo alguna canción
     public static void reproduciendo(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("0. Salir");
@@ -141,6 +146,7 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Reproduce la canción que el usuario elige de la biblioteca
     public static void reproducirCancion(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         Biblioteca biblioteca = getBiblioteca();
@@ -160,36 +166,40 @@ public class ProyectoFinalMusica {
         }
     }
     
-    
+    //Pausa la reproducción de la canción
     public static void pausarReproduccion() {
         Cancion cancionActual = ProyectoFinalMusica.getReproductor().getCancionActual();
         Reproductor reproductor = getReproductor();
         if(cancionActual != null){
             reproductor.pausarReproduccion();
             reproduciendo();
-        } else {
-        System.out.println("No hay ninguna canción en reproducción.");
+        }else{
+            System.out.println("No hay ninguna canción en reproducción.");
+        }
     }
-}
 
+    //Reanuda la cacnión de la reproducción pausada
     public static void reanudarReproduccion() {
         Reproductor reproductor = getReproductor();
         reproductor.reanudarReproduccion();
         reproduciendo();
     }
     
+    //Avanza a la siguiente canción en la lista de reproducción
     public static void avanzarReproduccion() {
         Reproductor reproductor = getReproductor();
         reproductor.avanzarReproduccion();
         reproduciendo();
     }
 
+    //Retocede a la anterior canción de la lista de reproducción
     public static void retrocederReproduccion() {
         Reproductor reproductor = getReproductor();
         reproductor.retrocederReproduccion();
         reproduciendo();
     }
     
+    //Deja ver las canciones que se tiene en la lista de reproducción
     public static void listaReproduccion(){
         Reproductor reproductor = getReproductor();
         reproductor.listaReproduccion();
@@ -204,10 +214,10 @@ public class ProyectoFinalMusica {
         String titulo = arregloDatos[0];
         String artista = arregloDatos[1];
         Biblioteca biblioteca = getBiblioteca();
-        ArrayList<Cancion> cancionesE = biblioteca.buscarTitulo(titulo);
+        ArrayList<Cancion> cancionesE = biblioteca.buscarTitulo(titulo.toLowerCase());
             for(int i = 0; i < cancionesE.size(); i++){
                 Cancion cancion = cancionesE.get(i);
-                if(cancion.consultarArtista().equals(artista)){
+                if(cancion.consultarArtista().equals(artista.toLowerCase())){
                     System.out.println((i + 1) + ". " + cancion);
                 }
             }   
@@ -228,10 +238,10 @@ public class ProyectoFinalMusica {
         String titulo = arregloDatos[0];
         String artista = arregloDatos[1];
         Biblioteca biblioteca = getBiblioteca();
-        ArrayList<Cancion> cancionesE = biblioteca.buscarTitulo(titulo);
+        ArrayList<Cancion> cancionesE = biblioteca.buscarTitulo(titulo.toLowerCase());
             for(int i = 0; i < cancionesE.size(); i++){
                 Cancion cancion = cancionesE.get(i);
-                if(cancion.consultarArtista().equals(artista)){
+                if(cancion.consultarArtista().equals(artista.toLowerCase())){
                     System.out.println((i + 1) + ". " + cancion);
                 }
             }
@@ -324,6 +334,7 @@ public class ProyectoFinalMusica {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Ingrese los datos de la canción (Título-Artista-Albúm-Genero):");
         String datos = obj.sc.nextLine();
+        datos.toLowerCase();
         String[] arregloDatos = datos.split("-");  
         String titulo = arregloDatos[0];
         String artista = arregloDatos[1];
