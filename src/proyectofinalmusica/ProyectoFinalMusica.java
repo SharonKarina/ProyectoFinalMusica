@@ -339,8 +339,7 @@ public class ProyectoFinalMusica {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Ingrese los datos de la canción (Título-Artista-Albúm-Genero):");
         String datos = obj.sc.nextLine();
-        datos.toLowerCase();
-        String[] arregloDatos = datos.split("-");  
+        String[] arregloDatos = datos.toLowerCase().split("-");  
         String titulo = arregloDatos[0];
         String artista = arregloDatos[1];
         String album = arregloDatos[2];
@@ -567,7 +566,6 @@ public class ProyectoFinalMusica {
             case 3:
                 System.out.println("---AGREGAR A REPRODUCCION---");
                 reproductor.agregarCancionLista(cancion);
-                System.out.println("La "+cancion.toString()+" se agrego a la lista de reproducción.");
                 break;
             case 4:
                 System.out.println("---ELIMINAR---");
@@ -613,8 +611,7 @@ public class ProyectoFinalMusica {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Ingrese nombre del Playlist:");
         String nombre = obj.sc.nextLine();
-        nombre.toLowerCase();
-        Playlist playlist = new Playlist(nombre);
+        Playlist playlist = new Playlist(nombre.toLowerCase());
         Biblioteca biblioteca = getBiblioteca();
         biblioteca.crearPlaylist(playlist);
     }
@@ -623,20 +620,25 @@ public class ProyectoFinalMusica {
     public static void verPlaylist(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         Biblioteca biblioteca = getBiblioteca();
-        biblioteca.listaPlaylist();
-        System.out.println("¿Cuál playlist desea ver?(nombre)");
-        String nombre = obj.sc.nextLine();
-        Playlist playlistS = biblioteca.buscarPlaylist(nombre.toLowerCase());
-        if(playlistS != null){
-            if(playlistS.getCanciones().size()>0){
-                playlistS.listaCanciones();
-                ejecutarPlaylist(playlistS);
-            }else{
-                System.out.println("La playlist "+nombre+" no tiene canciones.");
-                ejecutarPlaylist(playlistS);
-            }
+        if(biblioteca.getPlaylist().isEmpty()){
+            System.out.println("No hay playlist en la biblioteca.");
+            return;
         }else{
-            System.out.println("No se encontró la playlist '" + nombre + "'.");
+            biblioteca.listaPlaylist();
+            System.out.println("¿Cuál playlist desea ver?(nombre)");
+            String nombre = obj.sc.nextLine();
+            Playlist playlistS = biblioteca.buscarPlaylist(nombre.toLowerCase());
+            if(playlistS != null){
+                if(playlistS.getCanciones().size()>0){
+                    playlistS.listaCanciones();
+                    ejecutarPlaylist(playlistS);
+                }else{
+                    System.out.println("La playlist "+nombre+" no tiene canciones.");
+                    ejecutarPlaylist(playlistS);
+                }
+            }else{
+                System.out.println("No se encontró la playlist '" + nombre + "'.");
+            }
         }
     }
     
@@ -679,7 +681,6 @@ public class ProyectoFinalMusica {
         if(cancionesB.size() > 0){
             Cancion cancion = cancionesB.get(0);
             playlist.agregarCancion(cancion);
-            System.out.println("La " + cancion.toString() + " se ha agregado a la playlist.");
         }else{
             System.out.println("La canción con el título '" + titulo + "' no existe en la biblioteca.");
         }
@@ -693,7 +694,6 @@ public class ProyectoFinalMusica {
         int opcion = Integer.parseInt(obj.sc.nextLine());
         Cancion cancion = playlist.getCanciones().get(opcion - 1);
         playlist.eliminarCancion(cancion);
-        System.out.println("La canción "+ cancion.toString() +" se ha eliminado de la playlist.");
     }
     
     //Reproduce la playlist

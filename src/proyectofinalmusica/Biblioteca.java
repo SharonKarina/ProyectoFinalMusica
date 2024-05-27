@@ -121,10 +121,10 @@ public class Biblioteca {
     public void listaPlaylist(){
         ArrayList<Playlist> playlist = getPlaylist();
         if(playlist.size() > 0){
-        System.out.println("Playlist en la biblioteca:");
-        for(int i = 0; i < playlist.size(); i++){
-            System.out.println((i + 1) + ". " + playlist.get(i));
-        }
+            System.out.println("Playlist en la biblioteca:");
+            for(int i = 0; i < playlist.size(); i++){
+                System.out.println((i + 1) + ". " + playlist.get(i).getNombre());
+            }
         }else{
             System.out.println("No hay playlist en la biblioteca.");
         }

@@ -20,10 +20,6 @@ public class Playlist {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public ArrayList<Cancion> getCanciones() {
         return canciones;
     }
@@ -46,4 +42,5 @@ public class Playlist {
                 System.out.println((i + 1) + ". " + this.canciones.get(i));
             }
     }
+
 }
