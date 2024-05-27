@@ -206,6 +206,7 @@ public class ProyectoFinalMusica {
         reproduciendo();
     }
     
+    //Permite agregar una canción de la biblioteca a la lista de reproducción
     public static void agregarCancionReproducir(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("¿Qué canción desea agregar a la lista de reproducción? (titulo-artista)");
@@ -230,6 +231,7 @@ public class ProyectoFinalMusica {
         reproduciendo();
     }
     
+    //Permite eliminar una canción de la lista de reproducción
     public static void eliminarCancionReproducir(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("¿Qué canción desea eliminar de la lista de reproducción? (titulo-artista)");
@@ -254,11 +256,13 @@ public class ProyectoFinalMusica {
         reproduciendo();
     }
     
+    //Detiene la reproducción de la canción
     public static void detenerReproduccion(){
         Reproductor reproductor = getReproductor();
         reproductor.detenerReproduccion();
     }
     
+    //Muestra al ususario las opciones que puede ejecutar en la biblioteca
     public static void biblioteca(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("0. Salir");
@@ -330,6 +334,7 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Permite al ususario agregar nuevas canciones a la biblioteca
     public static void agregarCancion(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Ingrese los datos de la canción (Título-Artista-Albúm-Genero):");
@@ -345,6 +350,7 @@ public class ProyectoFinalMusica {
         biblioteca.agregarCancion(cancion);
     }
     
+    //En lista las canciones de la biblioteca y las muestra
     public static void verCanciones(){
         Biblioteca biblioteca = getBiblioteca();
         ArrayList<Cancion> listaCanciones = biblioteca.getCanciones();
@@ -358,6 +364,7 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Permite ordenar las canciones de la biblioteca en orden alfabetico
     public static void ordenarCanciones(int opcion){
         switch(opcion){
             case 1:
@@ -381,6 +388,7 @@ public class ProyectoFinalMusica {
         }
     }
     
+        //Ordena las canciones de la biblioteca teniendo en cuenta el titulo
         public static void ordenarTitulo(){
             ProyectoFinalMusica obj = new ProyectoFinalMusica();
             Biblioteca biblioteca = getBiblioteca();
@@ -388,6 +396,7 @@ public class ProyectoFinalMusica {
             biblioteca.listaCanciones();
         }
         
+        //Ordena las canciones de la biblioteca teniendo en cuenta el artista
         public static void ordenarArtista(){
             ProyectoFinalMusica obj = new ProyectoFinalMusica();
             Biblioteca biblioteca = getBiblioteca();
@@ -395,6 +404,7 @@ public class ProyectoFinalMusica {
             biblioteca.listaCanciones();
         }
         
+        //Ordena las canciones de la biblioteca teniendo en cuenta el album
         public static void ordenarAlbum(){
             ProyectoFinalMusica obj = new ProyectoFinalMusica();
             Biblioteca biblioteca = getBiblioteca();
@@ -402,6 +412,7 @@ public class ProyectoFinalMusica {
             biblioteca.listaCanciones();
         }
         
+        //Ordena las canciones de la biblioteca teniendo en cuenta el genero
         public static void ordenarGenero(){
             ProyectoFinalMusica obj = new ProyectoFinalMusica();
             Biblioteca biblioteca = getBiblioteca();
@@ -433,6 +444,91 @@ public class ProyectoFinalMusica {
         }
     }
     
+        //Busca la canción por el titulo
+        public static void buscarTitulo(){
+            ProyectoFinalMusica obj = new ProyectoFinalMusica();
+            System.out.println("Ingrese el título:");
+            String titulo = obj.sc.nextLine();
+            Biblioteca biblioteca = getBiblioteca();
+            ArrayList<Cancion> cancionesE = biblioteca.buscarTitulo(titulo.toLowerCase());
+            if(cancionesE.size() > 0){
+                System.out.println("Canciones encontradas:");
+                for(int i = 0; i < cancionesE.size(); i++){
+                    System.out.println((i + 1)+". "+cancionesE.get(i));
+                }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
+            }else{
+                System.out.println("No se encontró ninguna canción con ese título.");
+            }
+        }
+        
+        //Busca la canción por el artista
+        public static void buscarArtista(){
+            ProyectoFinalMusica obj = new ProyectoFinalMusica();
+            System.out.println("Ingrese el artista:");
+            String artista = obj.sc.nextLine();
+            Biblioteca biblioteca = getBiblioteca();
+            ArrayList<Cancion> cancionesE = biblioteca.buscarArtista(artista.toLowerCase());
+            if(cancionesE.size() > 0){
+                System.out.println("Canciones encontradas:");
+                for(int i = 0; i < cancionesE.size(); i++){
+                    System.out.println((i + 1)+". "+cancionesE.get(i));
+                }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
+            }else{
+                System.out.println("No se encontró ninguna canción con ese artista.");
+            }
+        }
+        
+        //Busca la canción por el album
+        public static void buscarAlbum(){
+            ProyectoFinalMusica obj = new ProyectoFinalMusica();
+            System.out.println("Ingrese el album:");
+            String album = obj.sc.nextLine();
+            Biblioteca biblioteca = getBiblioteca();
+            ArrayList<Cancion> cancionesE = biblioteca.buscarAlbum(album.toLowerCase());
+            if(cancionesE.size() > 0){
+                System.out.println("Canciones encontradas:");
+                for(int i = 0; i < cancionesE.size(); i++){
+                    System.out.println((i + 1)+". "+cancionesE.get(i));
+                }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
+            }else{
+                System.out.println("No se encontró ninguna canción con ese album.");
+            }
+        }
+        
+        //Busca la canción por el genero
+        public static void buscarGenero(){
+            ProyectoFinalMusica obj = new ProyectoFinalMusica();
+            System.out.println("Ingrese el genero:");
+            String genero = obj.sc.nextLine();
+            Biblioteca biblioteca = getBiblioteca();
+            ArrayList<Cancion> cancionesE = biblioteca.buscarGenero(genero.toLowerCase());
+            if(cancionesE.size() > 0){
+                System.out.println("Canciones encontradas:");
+                for(int i = 0; i < cancionesE.size(); i++){
+                    System.out.println((i + 1)+". "+cancionesE.get(i));
+                }
+                System.out.println("Elige una canción(numero): ");
+                int opc = Integer.parseInt(obj.sc.nextLine());
+                Cancion cancionR = cancionesE.get(opc-1);
+                menuBusqueda(cancionR);
+            }else{
+                System.out.println("No se encontró ninguna canción con ese genero.");
+            }
+        }
+    
+    //Opciones despues de encontrar la canción que se buscaba
     public static void menuBusqueda(Cancion cancion){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         Biblioteca biblioteca = getBiblioteca();
@@ -443,6 +539,7 @@ public class ProyectoFinalMusica {
         System.out.println("4. Eliminar");
         System.out.println("Seleccione una opción");
         int opc = Integer.parseInt(obj.sc.nextLine()); 
+        
         switch(opc){
             case 1:
                 System.out.println("---REPRODUCIR---");
@@ -458,7 +555,7 @@ public class ProyectoFinalMusica {
                     biblioteca.listaPlaylist();
                     System.out.println("¿A cual playlist desea agregarla?(nombre)");
                     String nombre = obj.sc.nextLine();
-                    Playlist playlistE = biblioteca.buscarPlaylist(nombre);
+                    Playlist playlistE = biblioteca.buscarPlaylist(nombre.toLowerCase());
                     if(playlistE != null){
                         playlistE.agregarCancion(cancion);
                         System.out.println("La "+cancion.toString()+" se ha agregado a la playlist "+nombre);
@@ -482,91 +579,12 @@ public class ProyectoFinalMusica {
         }
     }
     
-
-        public static void buscarTitulo(){
-            ProyectoFinalMusica obj = new ProyectoFinalMusica();
-            System.out.println("Ingrese el título:");
-            String titulo = obj.sc.nextLine();
-            Biblioteca biblioteca = getBiblioteca();
-            ArrayList<Cancion> cancionesE = biblioteca.buscarTitulo(titulo);
-            if(cancionesE.size() > 0){
-                System.out.println("Canciones encontradas:");
-                for(int i = 0; i < cancionesE.size(); i++){
-                    System.out.println((i + 1)+". "+cancionesE.get(i));
-                }
-                System.out.println("Elige una canción(numero): ");
-                int opc = Integer.parseInt(obj.sc.nextLine());
-                Cancion cancionR = cancionesE.get(opc-1);
-                menuBusqueda(cancionR);
-            }else{
-                System.out.println("No se encontró ninguna canción con ese título.");
-            }
-        }
-        
-        public static void buscarArtista(){
-            ProyectoFinalMusica obj = new ProyectoFinalMusica();
-            System.out.println("Ingrese el artista:");
-            String artista = obj.sc.nextLine();
-            Biblioteca biblioteca = getBiblioteca();
-            ArrayList<Cancion> cancionesE = biblioteca.buscarArtista(artista);
-            if(cancionesE.size() > 0){
-                System.out.println("Canciones encontradas:");
-                for(int i = 0; i < cancionesE.size(); i++){
-                    System.out.println((i + 1)+". "+cancionesE.get(i));
-                }
-                System.out.println("Elige una canción(numero): ");
-                int opc = Integer.parseInt(obj.sc.nextLine());
-                Cancion cancionR = cancionesE.get(opc-1);
-                menuBusqueda(cancionR);
-            }else{
-                System.out.println("No se encontró ninguna canción con ese artista.");
-            }
-        }
-        
-        public static void buscarAlbum(){
-            ProyectoFinalMusica obj = new ProyectoFinalMusica();
-            System.out.println("Ingrese el album:");
-            String album = obj.sc.nextLine();
-            Biblioteca biblioteca = getBiblioteca();
-            ArrayList<Cancion> cancionesE = biblioteca.buscarAlbum(album);
-            if(cancionesE.size() > 0){
-                System.out.println("Canciones encontradas:");
-                for(int i = 0; i < cancionesE.size(); i++){
-                    System.out.println((i + 1)+". "+cancionesE.get(i));
-                }
-                System.out.println("Elige una canción(numero): ");
-                int opc = Integer.parseInt(obj.sc.nextLine());
-                Cancion cancionR = cancionesE.get(opc-1);
-                menuBusqueda(cancionR);
-            }else{
-                System.out.println("No se encontró ninguna canción con ese album.");
-            }
-        }
-        
-        public static void buscarGenero(){
-            ProyectoFinalMusica obj = new ProyectoFinalMusica();
-            System.out.println("Ingrese el genero:");
-            String genero = obj.sc.nextLine();
-            Biblioteca biblioteca = getBiblioteca();
-            ArrayList<Cancion> cancionesE = biblioteca.buscarGenero(genero);
-            if(cancionesE.size() > 0){
-                System.out.println("Canciones encontradas:");
-                for(int i = 0; i < cancionesE.size(); i++){
-                    System.out.println((i + 1)+". "+cancionesE.get(i));
-                }
-                System.out.println("Elige una canción(numero): ");
-                int opc = Integer.parseInt(obj.sc.nextLine());
-                Cancion cancionR = cancionesE.get(opc-1);
-                menuBusqueda(cancionR);
-            }else{
-                System.out.println("No se encontró ninguna canción con ese genero.");
-            }
-        }
-    
+    //Permite eliminar una canción de la biblioteca
     public static void eliminarCancion(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("¿Qué canción deseas eliminar?(titulo-artista)");
         String datos = obj.sc.nextLine();
+        datos.toLowerCase();
         String[] arregloDatos = datos.split("-");
         String titulo = arregloDatos[0];
         String artista = arregloDatos[1];
@@ -590,22 +608,25 @@ public class ProyectoFinalMusica {
         }   
     }
     
+    //Permite que el usuario cree playlists de musica
     public static void crearPlaylist(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Ingrese nombre del Playlist:");
         String nombre = obj.sc.nextLine();
+        nombre.toLowerCase();
         Playlist playlist = new Playlist(nombre);
         Biblioteca biblioteca = getBiblioteca();
         biblioteca.crearPlaylist(playlist);
     }
     
+    //Muestra una lista de las playlist creadas por el usuario
     public static void verPlaylist(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         Biblioteca biblioteca = getBiblioteca();
         biblioteca.listaPlaylist();
         System.out.println("¿Cuál playlist desea ver?(nombre)");
         String nombre = obj.sc.nextLine();
-        Playlist playlistS = biblioteca.buscarPlaylist(nombre);
+        Playlist playlistS = biblioteca.buscarPlaylist(nombre.toLowerCase());
         if(playlistS != null){
             if(playlistS.getCanciones().size()>0){
                 playlistS.listaCanciones();
@@ -619,6 +640,7 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Permite al usuario realizar acciones en alguna playlist
     public static void ejecutarPlaylist(Playlist playlist){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Selecciona una opción:");
@@ -648,11 +670,12 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Agrega canciones de la biblioteca a la playlist
     public static void agregarCancionPlaylist(Playlist playlist) {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("Ingresa el título de la canción a agregar:");
         String titulo = obj.sc.nextLine();
-        ArrayList<Cancion> cancionesB = getBiblioteca().buscarTitulo(titulo);
+        ArrayList<Cancion> cancionesB = getBiblioteca().buscarTitulo(titulo.toLowerCase());
         if(cancionesB.size() > 0){
             Cancion cancion = cancionesB.get(0);
             playlist.agregarCancion(cancion);
@@ -662,6 +685,7 @@ public class ProyectoFinalMusica {
         }
     }
 
+    //Elimina canciones de la playlist
     public static void eliminarCancionPlaylist(Playlist playlist) {
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         playlist.listaCanciones();
@@ -672,6 +696,7 @@ public class ProyectoFinalMusica {
         System.out.println("La canción "+ cancion.toString() +" se ha eliminado de la playlist.");
     }
     
+    //Reproduce la playlist
     public static void reproducirPlaylist(Playlist playlist){
         Reproductor reproductor = getReproductor();
         ArrayList<Cancion> cancionesP = playlist.getCanciones();
@@ -687,12 +712,13 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Elimina una playlist
     public static void eliminarPlaylist(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("¿Qué playlist deseas eliminar?(nombre)");
         String nombre = obj.sc.nextLine();
         Biblioteca biblioteca = getBiblioteca();
-        Playlist playlistAEliminar = biblioteca.buscarPlaylist(nombre);
+        Playlist playlistAEliminar = biblioteca.buscarPlaylist(nombre.toLowerCase());
         if(playlistAEliminar != null){
             biblioteca.eliminarPlaylist(playlistAEliminar);
             System.out.println("La playlist '" + nombre + "' ha sido eliminada.");
@@ -701,6 +727,7 @@ public class ProyectoFinalMusica {
         }
     }
     
+    //Permite al usuario ajustar el volumen del reproductor
     public static void ajustarVolumen(){
         ProyectoFinalMusica obj = new ProyectoFinalMusica();
         System.out.println("¿Qué volumen desea?(1-100)");
