@@ -191,8 +191,9 @@ public class ProyectoFinalMusica {
     }
     
     public static void listaReproduccion(){
-        Reproductor reproductor = new Reproductor();
+        Reproductor reproductor = getReproductor();
         reproductor.listaReproduccion();
+        reproduciendo();
     }
     
     public static void agregarCancionReproducir(){

@@ -31,9 +31,33 @@ public class Reproductor {
         System.out.println("Reproduciendo audio de la canción.");
     }
     
-    public void agregarCancionLista(Cancion cancion) {
-        this.listaReproduccion.add(cancion);
-        this.posicionActual = this.listaReproduccion.size() - 1;
+    public boolean estaEnLista(Cancion cancion) {
+        for(Cancion c : listaReproduccion){
+            if(c.equals(cancion)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void eliminarDuplicados() {
+        ArrayList<Cancion> listaSinDuplicados = new ArrayList<>();
+        for(int i=0; i<listaReproduccion.size(); i++){
+            Cancion c = listaReproduccion.get(i);
+            if(!listaSinDuplicados.contains(c)){
+                listaSinDuplicados.add(c);
+            }
+        }
+        listaReproduccion = listaSinDuplicados;
+    }
+    
+    public void agregarCancionLista(Cancion cancion) {   
+        if(!estaEnLista(cancion)){
+            listaReproduccion.add(cancion);
+            System.out.println("La canción " + cancion.consultarTitulo() + " se ha agregado a la lista de reproducción.");
+        }else{
+            System.out.println("La canción " + cancion.consultarTitulo() + " ya se encuentra en la lista de reproducción.");
+        }
     }
     
     public void eliminarCancionLista(Cancion cancion) {
@@ -71,7 +95,12 @@ public class Reproductor {
     public void avanzarReproduccion() {
         if(estaReproduciendo && this.posicionActual < this.listaReproduccion.size() - 1){
             this.posicionActual++;
-            reproducirCancion(this.listaReproduccion.get(this.posicionActual));
+            Cancion siguienteCancion = this.listaReproduccion.get(this.posicionActual);
+            reproducirCancion(siguienteCancion);
+        }else if(estaReproduciendo && this.posicionActual == this.listaReproduccion.size() - 1){
+            this.posicionActual = 0;
+            Cancion primeraCancion = this.listaReproduccion.get(this.posicionActual);
+            reproducirCancion(primeraCancion);
         }else{
             System.out.println("No se puede avanzar, no hay más canciones en la lista.");
         }
@@ -81,11 +110,8 @@ public class Reproductor {
         if(estaReproduciendo && this.posicionActual > 0){
             this.posicionActual--;
             reproducirCancion(this.listaReproduccion.get(this.posicionActual));
-        }else if(estaReproduciendo && this.posicionActual == 0){
-            this.posicionActual = 0;
-            reproducirCancion(this.listaReproduccion.get(this.posicionActual));
         }else{
-        System.out.println("No se puede retroceder, no hay canciones antes.");
+            System.out.println("No se puede retroceder, ya está en la primera canción de la lista.");
         }
     }
 
