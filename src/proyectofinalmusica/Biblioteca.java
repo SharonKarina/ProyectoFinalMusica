@@ -12,23 +12,29 @@ public class Biblioteca {
         this.playlist = new ArrayList<>();
     }
     
+    //permite agregar una canción a la lsita de canciones
     public void agregarCancion(Cancion cancion){
         canciones.add(cancion);
         System.out.println("La "+cancion.toString()+" fue agregada con exito.");
     }
     
+    //permite eliminar una cancion de la lsita de canciones
     public void eliminarCancion(Cancion cancion){
         canciones.remove(cancion);
     }
     
+    //permite que el usuario cree una playlist
     public void crearPlaylist(Playlist playlistN){
         playlist.add(playlistN);
     }
     
+    //permite que el ususario elimine una playlist
     public void eliminarPlaylist(Playlist playlistN){
         playlist.remove(playlistN);
     }
     
+    
+    //permite al usuario buscar alguna cancion por el titulo
     public ArrayList<Cancion> buscarTitulo(String titulo){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
@@ -39,6 +45,7 @@ public class Biblioteca {
         return cancionesE;
     }
     
+    //permite al usuario buscar alguna cancion por el artista
     public ArrayList<Cancion> buscarArtista(String artista){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
@@ -49,6 +56,7 @@ public class Biblioteca {
         return cancionesE;
     }
     
+    //permite al usuario buscar alguna cancion por el album
     public ArrayList<Cancion> buscarAlbum(String album){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
@@ -59,6 +67,7 @@ public class Biblioteca {
         return cancionesE;
     }
     
+    //permite al usuario buscar alguna cancion por el genero
     public ArrayList<Cancion> buscarGenero(String genero){
         ArrayList<Cancion> cancionesE = new ArrayList<>();
         for(int i=0; i< this.canciones.size(); i++){
@@ -69,6 +78,7 @@ public class Biblioteca {
         return cancionesE;
     }
     
+    //permite al usuario buscar alguna playlist por el nombre
     public Playlist buscarPlaylist(String nombre){
         for(int i=0; i< this.playlist.size(); i++){
             if(this.playlist.get(i).getNombre().equals(nombre.toLowerCase())){
@@ -78,30 +88,35 @@ public class Biblioteca {
         return null;
     }
     
+    //permite al usuario ordenar las canciones por el titulo
     public ArrayList<Cancion> ordenarTitulo(){
         ArrayList<Cancion> canciones = getCanciones();
         Collections.sort(canciones,new CancionComparatorByName());
         return canciones;
     }
     
+    //permite al usuario ordenar las canciones por el artista
     public ArrayList<Cancion> ordenarArtista(){
         ArrayList<Cancion> canciones = getCanciones();
         Collections.sort(canciones,new CancionComparatorByArtista());
         return canciones;
     }
     
+    //permite al usuario ordenar las canciones por el album
     public ArrayList<Cancion> ordenarAlbum(){
         ArrayList<Cancion> canciones = getCanciones();
         Collections.sort(canciones,new CancionComparatorByAlbum());
         return canciones;
     }
     
+    //permite al usuario ordenar las canciones por el genero
     public ArrayList<Cancion> ordenarGenero(){
         ArrayList<Cancion> canciones = getCanciones();
         Collections.sort(canciones,new CancionComparatorByGenero());
         return canciones;
     }
     
+    //muestra una lista de las canciones en la biblioteca
     public void listaCanciones(){
         ArrayList<Cancion> canciones = getCanciones();
         if(canciones.size() > 0){
@@ -118,6 +133,7 @@ public class Biblioteca {
         return canciones;
         }
     
+    //muestra una lista de las playlist en la biblioteca
     public void listaPlaylist(){
         ArrayList<Playlist> playlist = getPlaylist();
         if(playlist.size() > 0){

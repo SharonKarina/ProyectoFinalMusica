@@ -23,19 +23,18 @@ public class Playlist {
     public ArrayList<Cancion> getCanciones() {
         return canciones;
     }
-
-    public void setCanciones(ArrayList<Cancion> canciones) {
-        this.canciones = canciones;
-    }
     
+    //permite agregar la cancion a la playlist
     public void agregarCancion(Cancion cancion){
         canciones.add(cancion);
     }
     
+    //permite eliminar la cancion de la playlist
     public void eliminarCancion(Cancion cancion){
         canciones.remove(cancion);
     }
 
+    //muestra las canciones de la playlist
     public void listaCanciones(){
         System.out.println("Canciones en " + this.nombre + ":");
             for (int i = 0; i < this.canciones.size(); i++) {

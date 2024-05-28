@@ -227,7 +227,6 @@ public class ProyectoFinalMusica {
         Cancion cancionAgregar = cancionesE.get(opcion - 1);
         Reproductor reproductor = getReproductor();
         reproductor.agregarCancionLista(cancionAgregar);
-        System.out.println("La canción " + cancionAgregar.consultarTitulo() + " se ha agregado a la lista de reproducción.");
         reproduciendo();
     }
     
