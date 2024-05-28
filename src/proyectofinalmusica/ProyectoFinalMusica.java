@@ -222,12 +222,17 @@ public class ProyectoFinalMusica {
                     System.out.println((i + 1) + ". " + cancion);
                 }
             }   
-        System.out.println("Selecciona el número de la canción a agregar:");
-        int opcion = Integer.parseInt(obj.sc.nextLine());
-        Cancion cancionAgregar = cancionesE.get(opcion - 1);
-        Reproductor reproductor = getReproductor();
-        reproductor.agregarCancionLista(cancionAgregar);
-        reproduciendo();
+        if(cancionesE == null){
+            System.out.println("No se encontro la canción");
+        }else{
+            System.out.println("Selecciona el número de la canción a agregar:");
+            int opcion = Integer.parseInt(obj.sc.nextLine());
+            Cancion cancionAgregar = cancionesE.get(opcion - 1);
+            Reproductor reproductor = getReproductor();
+            reproductor.agregarCancionLista(cancionAgregar);
+            reproduciendo();
+        }
+        
     }
     
     //Permite eliminar una canción de la lista de reproducción
@@ -272,7 +277,8 @@ public class ProyectoFinalMusica {
         System.out.println("5. Eliminar cancion");
         System.out.println("6. Crear playlist");
         System.out.println("7. Ver playlist");
-        System.out.println("8. Eliminar playlist");
+        System.out.println("8. Reproducir playlist");
+        System.out.println("9. Eliminar playlist");
         System.out.println("Seleccione una opción:");
         int opc = Integer.parseInt(obj.sc.nextLine());
         ejecutarBiblioteca(opc);
@@ -325,6 +331,10 @@ public class ProyectoFinalMusica {
                 verPlaylist();
                 break;
             case 8:
+                System.out.println("---REPRODUCIR PLAYLIST---");
+                reproducirPlaylist();
+                break;
+            case 9:
                 System.out.println("---ELIMINAR PLAYLIST---");
                 eliminarPlaylist();
                 break;
@@ -648,7 +658,6 @@ public class ProyectoFinalMusica {
         System.out.println("0. Salir");
         System.out.println("1. Agregar canción");
         System.out.println("2. Eliminar canción");
-        System.out.println("3. Reproducir playlist");
         int opcion = Integer.parseInt(obj.sc.nextLine());
         switch(opcion){
             case 0:
@@ -661,10 +670,6 @@ public class ProyectoFinalMusica {
             case 2:
                 System.out.println("---ELIMINAR CANCION---");
                 eliminarCancionPlaylist(playlist);
-                break;
-            case 3:
-                System.out.println("---REPRODUCIR PLAYLIST---");
-                reproducirPlaylist(playlist);
                 break;
             default:
                 System.out.println("La opción no es valida");
@@ -680,6 +685,7 @@ public class ProyectoFinalMusica {
         if(cancionesB.size() > 0){
             Cancion cancion = cancionesB.get(0);
             playlist.agregarCancion(cancion);
+            System.out.println("La "+cancion.toString()+" se ha agregado a la playlist");
         }else{
             System.out.println("La canción con el título '" + titulo + "' no existe en la biblioteca.");
         }
@@ -696,19 +702,25 @@ public class ProyectoFinalMusica {
     }
     
     //Reproduce la playlist
-    public static void reproducirPlaylist(Playlist playlist){
-        Reproductor reproductor = getReproductor();
-        ArrayList<Cancion> cancionesP = playlist.getCanciones();
-        if(cancionesP.size() == 0){
-            System.out.println("La playlist "+playlist.getNombre()+" no tiene canciones");
-        }else{
-            System.out.println("Reproduciendo la playlist: " + playlist.getNombre());
-            for(int i=0; i<cancionesP.size();i++){
-                Cancion cancion = cancionesP.get(i);
-                reproductor.reproducirCancion(cancion);
-                reproduciendo();
+    public static void reproducirPlaylist(){
+        ProyectoFinalMusica obj = new ProyectoFinalMusica();
+        ArrayList<Playlist> listaReproduccion = biblioteca.getPlaylist();
+        if(listaReproduccion.size()>0){
+            System.out.println("Selecciona el número de la playlist a reproducir:");
+            for(int i =0; i<listaReproduccion.size(); i++){
+                System.out.println((i+1)+". "+listaReproduccion.get(i).getNombre());
             }
-        }
+                int opcion = Integer.parseInt(obj.sc.nextLine());
+                if(opcion>0 && opcion<= listaReproduccion.size()){
+                    Playlist playlistReproducir = listaReproduccion.get(opcion-1);
+                    reproductor.reproducirPlaylist(playlistReproducir);
+                    reproduciendo();
+                }else{
+                    System.out.println("Opción no valida");
+                }
+            }else{
+                System.out.println("No hay listas en la biblioteca");
+            }
     }
     
     //Elimina una playlist

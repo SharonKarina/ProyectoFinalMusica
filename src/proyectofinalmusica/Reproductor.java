@@ -74,22 +74,21 @@ public class Reproductor {
     //permite eliminar una cancion de la lista de reproduccion
     public void eliminarCancionLista(Cancion cancion) {
         int indiceCancion = this.listaReproduccion.indexOf(cancion);
-    this.listaReproduccion.remove(cancion);
-
-    // Actualizar el índice actual si la canción eliminada es anterior a la actual
-    if (indiceCancion < this.indiceActual) {
-        this.indiceActual--;
-    } else if (indiceCancion == this.indiceActual) {
+        this.listaReproduccion.remove(cancion);
+        // Actualiza el índice actual si la canción eliminada es anterior a la actual
+        if(indiceCancion < this.indiceActual) {
+            this.indiceActual--;
+        }else if(indiceCancion == this.indiceActual) {
         // Si la canción eliminada es la actual, reproducir la siguiente canción
-        if (this.indiceActual < this.listaReproduccion.size() - 1) {
-            this.indiceActual++;
-            Cancion siguienteCancion = this.listaReproduccion.get(this.indiceActual);
-            reproducirCancion(siguienteCancion);
-        } else {
+            if(this.indiceActual < this.listaReproduccion.size() - 1) {
+                this.indiceActual++;
+                Cancion siguienteCancion = this.listaReproduccion.get(this.indiceActual);
+                reproducirCancion(siguienteCancion);
+            }else{
             // Si no hay más canciones, detener la reproducción
             detenerReproduccion();
         }
-    }
+        }
     }
     
     //pausa la reproduccion de la cancion
@@ -175,6 +174,16 @@ public class Reproductor {
                 Cancion cancion = listaReproduccion.get(i);
                 System.out.println((i + 1) + ". " + cancion.consultarTitulo()+", "+cancion.consultarArtista()+", "+cancion.consultarAlbum()+", "+cancion.consultarGenero());
             }
+        }
+    }
+    
+    public void reproducirPlaylist(Playlist playlist){
+        listaReproduccion = playlist.getCanciones();
+        if(!listaReproduccion.isEmpty()){
+            indiceActual = 0;
+            reproducirCancion(listaReproduccion.get(indiceActual));
+        }else{
+            System.out.println("La playlist no tiene canciones");
         }
     }
 
